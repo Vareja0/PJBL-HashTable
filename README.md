@@ -107,7 +107,7 @@ O fator de carga ($$\lambda = \frac{\text{nº de itens}}{\text{tamanho da tabela
 
 ### 3.2. Gráficos Comparativos (Exemplos)
 
-Para uma visualização clara, gráficos são essenciais. Abaixo estão os dados para a construção de um gráfico comparativo de **Tempo de Inserção** para a tabela de **100.003**, que ilustra bem o impacto do fator de carga.
+Para uma visualização clara, gráficos são essenciais. 
 
 **Tempo de Inserção (ms) vs. Volume de Dados (Tabela de 100.003)**
 
@@ -117,27 +117,41 @@ Para uma visualização clara, gráficos são essenciais. Abaixo estão os dados
 | 100.000 | 1.40 | 37.79 | 3.21 |
 | 1.000.000 | 34.86 | 188419.26 | 202109.40 |
 
-*(Um gráfico de barras com esses dados mostraria visualmente a explosão no tempo para as técnicas de endereçamento aberto em alta carga.)*
-
 ## Comparação Entre Tabelas
 
 ![Texto Alternativo](imagesPJBL/comparacao_tabelas.png)
+
+Tabela de 10.007: O Encadeamento é o único viável.
+
+Tabela de 100.003 (Fator de Carga ≈ 1): Aqui vemos a diferença clássica: o Encadeamento é o mais rápido, seguido pelo Hashing Duplo. A Sondagem Linear é visivelmente a mais lenta das três, pois o agrupamento primário força muitas sondagens extras.
+
+Tabela de 1.000.003 (Fator de Carga ≈ 0.1): Com a tabela "vazia", as colisões são raras, e todos os métodos têm desempenho excelente e muito similar.
 
 ## Explosão de Desempenho
 
 ![Texto Alternativo](imagesPJBL/explosao_desempenho.png)
 
+Encadeamento (Linha Azul): Mostra um crescimento de tempo suave e quase linear. Isso é esperado, pois o custo aumenta à medida que as listas encadeadas crescem, mas o sistema continua funcional e previsível.
+
+Linear e Duplo (Linhas Laranja e Cinza): Mostram uma "explosão" de desempenho. O tempo de inserção é baixo quando há poucos dados, mas dispara de forma exponencial quando o número de registros ultrapassa a capacidade da tabela (100003). Isso acontece porque, uma vez que a tabela está cheia, cada nova tentativa de inserção força o algoritmo a percorrer a tabela inteira em busca de um espaço que não existe. Seu código implementa corretamente essa parada, mas o custo computacional para chegar a essa conclusão é imenso, o que o gráfico captura perfeitamente.
+
 ## Resultados da Tabela de Tamanho 1000003
 
 ![Texto Alternativo](imagesPJBL/tabela_1000003.png)
+
+Este gráfico mostra o cenário ideal. Como a tabela nunca fica cheia (o fator de carga é no máximo 1), não há explosão de desempenho. Todos os métodos são extremamente rápidos e eficientes. Isso demonstra que, com um dimensionamento adequado, qualquer uma das técnicas pode ser eficaz.
 
 ## Resultados da Tabela de Tamanho 100003
 
 ![Texto Alternativo](imagesPJBL/tabela_100003.png)
 
+Endereçamento Aberto é inviável quando o número de itens (1 milhão) excede em muito a capacidade da tabela (100 mil).
+
 ## Resultados da Tabela de Tamanho 10007
 
 ![Texto Alternativo](imagesPJBL/tabela_10007.png)
+
+Este gráfico mostra o cenário de falha catastrófica para o Endereçamento Aberto (Linear e Duplo). Com 100 mil ou 1 milhão de itens em uma tabela de 10 mil posições, o tempo de inserção se torna proibitivo, como esperado. O Encadeamento, por outro lado, continua a funcionar, embora com um tempo maior, pois as listas ficam muito longas.
 
 ## 4. Conclusão
 
