@@ -153,6 +153,198 @@ Endereçamento Aberto é inviável quando o número de itens (1 milhão) excede 
 
 Este gráfico mostra o cenário de falha catastrófica para o Endereçamento Aberto (Linear e Duplo). Com 100 mil ou 1 milhão de itens em uma tabela de 10 mil posições, o tempo de inserção se torna proibitivo, como esperado. O Encadeamento, por outro lado, continua a funcionar, embora com um tempo maior, pois as listas ficam muito longas.
 
+## resultado 10007
+
+|Metodo|TamTabela|TamDados|TempoInsercao(ms)|TempoBusca(ms)|Colisoes|Lista1|Lista2|Lista3|GapMin|GapMax|GapMedia |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|Encadeamento|10007|10000|0.663107|0.456078|5048|6|6|6|1|11|1 |
+|LinearProbing|10007|10000|1.867393|1.482048|420117|0|0|0|1|4|1 |
+|DoubleHashing|10007|10000|0.639423|0.616630|66184|0|0|0|1|1|1 |
+|Encadeamento|10007|100000|2.867674|2.850552|499602|26|24|24|0|0|0 |
+|LinearProbing|10007|100000|1839.601685|1838.271240|900962580|0|0|0|0|0|0 |
+|DoubleHashing|10007|100000|2030.093384|2037.739380|900637826|0|0|0|0|0|0 |
+|Encadeamento|10007|1000000|475.915009|479.770630|49972599|141|139|138|0|0|0 |
+|LinearProbing|10007|1000000|20124.259766|20122.208984|9907632507|0|0|0|0|0|0 |
+|DoubleHashing|10007|1000000|22109.380859|21982.962891|9906945556|0|0|0|0|0|0 |
+
+### Fator de Carga:
+
+10.000 / 10007 ≈ 1 (quase cheia).
+100.000 / 10007 ≈ 10 (sobrecarregada).
+1.000.000 / 10007 ≈ 100 (extremamente sobrecarregada).
+
+
+### Tempos de Inserção e Busca:
+
+#### Para 10.000 elementos:
+
+Encadeamento: 0,66 ms (inserção), 0,46 ms (busca) — mais rápido.
+DoubleHashing: 0,64 ms (inserção), 0,62 ms (busca) — semelhante ao Encadeamento.
+LinearProbing: 1,87 ms (inserção), 1,48 ms (busca) — mais lento devido a mais colisões.
+
+
+#### Para 100.000 elementos:
+
+Encadeamento: 2,87 ms (inserção), 2,85 ms (busca) — eficiente.
+LinearProbing: ~1839 ms (inserção), ~1838 ms (busca) — extremamente lento.
+DoubleHashing: ~2030 ms (inserção), ~2038 ms (busca) — igualmente lento.
+
+
+#### Para 1.000.000 elementos:
+
+Encadeamento: ~476 ms (inserção), ~480 ms (busca) — muito melhor.
+LinearProbing: ~20.124 ms (inserção), ~20.122 ms (busca) — impraticável.
+DoubleHashing: ~22.109 ms (inserção), ~21.983 ms (busca) — igualmente impraticável.
+
+
+
+
+### Colisões:
+
+Encadeamento: 5.048 (10.000), 499.602 (100.000), 49.972.599 (1.000.000) — aumentam com o tamanho dos dados, mas gerenciados por listas.
+LinearProbing: 420.117 (10.000), 900.962.580 (100.000), 9.907.632.507 (1.000.000) — extremamente altas.
+DoubleHashing: 66.184 (10.000), 900.637.826 (100.000), 9.906.945.556 (1.000.000) — também altas.
+
+
+### Comprimento das Listas (Encadeamento):
+
+Listas mais longas crescem com os dados: 6 (10.000), 24–26 (100.000), 138–141 (1.000.000).
+
+
+### Lacunas (Sondagem):
+
+Para 10.000: LinearProbing (GapMax: 4), DoubleHashing (GapMax: 1) — DoubleHashing tem sequências de sondagem mais curtas.
+Para 100.000 e 1.000.000: Lacunas caem para 0 devido à saturação da tabela.
+
+## resultado 100003
+
+|Metodo|TamTabela|TamDados|TempoInsercao(ms)|TempoBusca(ms)|Colisoes|Lista1|Lista2|Lista3|GapMin|GapMax|GapMedia|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|Encadeamento|100003|10000|0.040606|0.026720|537|4|3|3|1|110|10|
+|LinearProbing|100003|10000|0.033673|0.018625|607|0|0|0|1|110|10|
+|DoubleHashing|100003|10000|0.035607|0.032912|557|0|0|0|1|110|9|
+|Encadeamento|100003|100000|1.400685|0.623192|50420|7|7|7|1|13|1|
+|LinearProbing|100003|100000|37.793678|37.786949|17850445|0|0|0|2|4|3|
+|DoubleHashing|100003|100000|3.210379|3.538386|929663|0|0|0|1|1|1|
+|Encadeamento|100003|1000000|34.864658|30.009356|5002251|26|26|25|1|1|1|
+|LinearProbing|100003|1000000|188419.265625|188285.656250|90017460116|0|0|0|0|0|0|
+|DoubleHashing|100003|1000000|202109.406250|204082.109375|90003386794|0|0|0|0|0|0|
+
+### Fator de Carga:
+
+10.000 / 100003 ≈ 0,1 (esparsa).
+100.000 / 100003 ≈ 1 (quase cheia).
+1.000.000 / 100003 ≈ 10 (sobrecarregada).
+
+
+### Tempos de Inserção e Busca:
+
+#### Para 10.000 elementos:
+
+LinearProbing: 0,034 ms (inserção), 0,019 ms (busca) — mais rápido devido ao baixo fator de carga.
+DoubleHashing: 0,036 ms (inserção), 0,033 ms (busca).
+Encadeamento: 0,041 ms (inserção), 0,027 ms (busca).
+
+
+#### Para 100.000 elementos:
+
+Encadeamento: 1,40 ms (inserção), 0,62 ms (busca) — melhor desempenho.
+DoubleHashing: 3,21 ms (inserção), 3,54 ms (busca).
+LinearProbing: 37,79 ms (inserção), 37,79 ms (busca) — muito mais lento.
+
+
+#### Para 1.000.000 elementos:
+
+Encadeamento: 34,86 ms (inserção), 30,01 ms (busca) — muito superior.
+DoubleHashing: ~202.109 ms (inserção), ~204.082 ms (busca) — extremamente lento.
+LinearProbing: ~188.419 ms (inserção), ~188.286 ms (busca) — igualmente lento.
+
+
+
+
+### Colisões:
+
+Encadeamento: 537 (10.000), 50.420 (100.000), 5.002.251 (1.000.000).
+LinearProbing: 607 (10.000), 17.850.445 (100.000), 90.017.460.116 (1.000.000).
+DoubleHashing: 557 (10.000), 929.663 (100.000), 90.003.386.794 (1.000.000).
+
+
+### Comprimento das Listas (Encadeamento):
+
+Listas mais longas: 3–4 (10.000), 7 (100.000), 25–26 (1.000.000).
+
+
+### Lacunas (Sondagem):
+
+Para 10.000: GapMax 110 para ambos os métodos de sondagem, indicando sequências longas em tabelas esparsas.
+Para 100.000: LinearProbing (GapMax: 4), DoubleHashing (GapMax: 1).
+Para 1.000.000: Lacunas caem para 0 devido à saturação.
+
+## resultado 1000003
+
+|Metodo|TamTabela|TamDados|TempoInsercao(ms)|TempoBusca(ms)|Colisoes|Lista1|Lista2|Lista3|GapMin|GapMax|GapMedia|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|Encadeamento|1000003|10000|0.164159|0.022552|43|2|2|2|1|999|100|
+|LinearProbing|1000003|10000|0.149962|0.017202|43|0|0|0|1|999|100|
+|DoubleHashing|1000003|10000|0.141336|0.027301|44|0|0|0|1|999|100|
+|Encadeamento|1000003|100000|0.494530|0.212960|5003|4|4|4|1|110|10|
+|LinearProbing|1000003|100000|0.577356|0.207510|5567|0|0|0|1|110|10|
+|DoubleHashing|1000003|100000|0.561016|0.367120|5353|0|0|0|1|109|10|
+|Encadeamento|1000003|1000000|11.037131|7.224039|499067|9|8|8|1|14|1|
+|LinearProbing|1000003|1000000|662.049316|651.075378|302530120|0|0|0|1|6|1|
+|DoubleHashing|1000003|1000000|60.120300|64.680496|11194249|0|0|0|1|1|1|
+
+### Fator de Carga:
+
+10.000 / 1000003 ≈ 0,01 (muito esparsa).
+100.000 / 1000003 ≈ 0,1 (esparsa).
+1.000.000 / 1000003 ≈ 1 (quase cheia).
+
+
+### Tempos de Inserção e Busca:
+
+#### Para 10.000 elementos:
+
+DoubleHashing: 0,14 ms (inserção), 0,027 ms (busca).
+LinearProbing: 0,15 ms (inserção), 0,017 ms (busca) — busca mais rápida.
+Encadeamento: 0,16 ms (inserção), 0,023 ms (busca).
+
+
+#### Para 100.000 elementos:
+
+Encadeamento: 0,49 ms (inserção), 0,21 ms (busca) — mais rápido.
+LinearProbing: 0,58 ms (inserção), 0,21 ms (busca).
+DoubleHashing: 0,56 ms (inserção), 0,37 ms (busca).
+
+
+#### Para 1.000.000 elementos:
+
+Encadeamento: 11,04 ms (inserção), 7,22 ms (busca) — muito superior.
+DoubleHashing: 60,12 ms (inserção), 64,68 ms (busca).
+LinearProbing: 662,05 ms (inserção), 651,08 ms (busca) — mais lento.
+
+
+
+
+### Colisões:
+
+Encadeamento: 43 (10.000), 5.003 (100.000), 499.067 (1.000.000).
+LinearProbing: 43 (10.000), 5.567 (100.000), 302.530.120 (1.000.000).
+DoubleHashing: 44 (10.000), 5.353 (100.000), 11.194.249 (1.000.000).
+
+
+### Comprimento das Listas (Encadeamento):
+
+Listas mais longas: 2 (10.000), 4 (100.000), 8–9 (1.000.000).
+
+
+### Lacunas (Sondagem):
+
+Para 10.000: GapMax 999 para ambos os métodos (tabela esparsa, sequências longas).
+Para 100.000: GapMax 110 (LinearProbing), 109 (DoubleHashing).
+Para 1.000.000: LinearProbing (GapMax: 6), DoubleHashing (GapMax: 1).
+
+
 ## 4. Conclusão
 
 Com base na análise dos dados, as seguintes conclusões podem ser tiradas:
