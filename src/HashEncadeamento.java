@@ -104,7 +104,12 @@ public class HashEncadeamento {
             }
         }
 
-        int mediaGap = numGaps > 0 ? somaGaps / numGaps : 0;
+        int mediaGap;
+        if (numGaps > 0) {
+            mediaGap = somaGaps / numGaps;
+        } else {
+            mediaGap = 0;
+        }
         return new int[]{minGap == 999999 ? 0 : minGap, maxGap, mediaGap};
     }
 }

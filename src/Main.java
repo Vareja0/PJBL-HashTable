@@ -42,7 +42,14 @@ public class Main {
 
         for (int tamTabela : TAMANHOS_TABELA) {
             // Seleciona o FileWriter a partir do tamanho da tabela
-            FileWriter csv = tamTabela == 10007 ? csv10007 : tamTabela == 100003 ? csv100003 : csv1000003;
+            FileWriter csv;
+            if (tamTabela == 10007) {
+                csv = csv10007;
+            } else if (tamTabela == 100003) {
+                csv = csv100003;
+            } else {
+                csv = csv1000003;
+            }
 
             for (int i = 0; i < 3; i++) {
                 int tamDados = TAMANHOS_DADOS[i];
