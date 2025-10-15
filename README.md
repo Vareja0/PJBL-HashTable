@@ -6,13 +6,14 @@ Este trabalho acadêmico, desenvolvido para a disciplina de Estrutura de Dados, 
 
 1.  **Encadeamento Separado:** Uma estratégia que utiliza listas encadeadas para armazenar múltiplos elementos que colidem no mesmo índice da tabela.
 2.  **Endereçamento Aberto com Sondagem Linear:** Uma técnica de *rehashing* que, em caso de colisão, busca o próximo espaço livre na tabela de forma sequencial.
-3.  **Endereçamento Aberto com Hashing Duplo:** Uma técnica de *rehashing* mais avançada que utiliza uma segunda função de hash para calcular o "passo" a ser dado na busca por um espaço livre, mitigando o problema de agrupamento.
+3.  **Endereçamento Aberto com Hashing Duplo:** Uma técnica de *rehashing* mais eficiente que utiliza uma segunda função de hash para calcular o "passo" a ser dado na busca por um espaço livre, mitigando o problema de agrupamento.
 
 O desempenho de cada abordagem foi medido em cenários variados de tamanho de tabela e volume de dados, analisando métricas como tempo de inserção, tempo de busca e número de colisões.
 
-* **Autor:** Riscala Miguel Fadel Neto
-* **Autor:** Victor Valerio Fadel
-* **Autor:** Pedro senes velloso
+**Autores:** 
+* Riscala Miguel Fadel Neto
+* Victor Valerio Fadel
+* Pedro Senes Velloso Ribeiro
 
 ## 2. Implementação e Metodologia
 
@@ -53,10 +54,10 @@ Para garantir uma análise justa e abrangente, a seguinte metodologia foi adotad
     * `1.000.000` de registros
 
 * **Métricas Coletadas:**
-    * **Tempo de Inserção e Busca:** Medido em milissegundos (`ms`) para a operação completa no conjunto de dados.
+    * **Tempos de Inserção e Busca:** Medido em milissegundos (`ms`) para a operação completa no conjunto de dados.
     * **Número de Colisões:** Contabiliza o número de "passos" ou "sondagens" necessários para encontrar uma posição livre (na inserção) ou o elemento desejado (na busca).
     * **Maiores Listas (Encadeamento):** Os tamanhos das 3 maiores listas encadeadas.
-    * **Análise de Gaps (Endereçamento Aberto):** O tamanho do menor, do maior e a média dos espaços vazios (`gaps`) entre os elementos na tabela.
+    * **Análise de Gaps (Endereçamento Aberto):** O tamanho do menor, do maior e a média dos espaços vazios (gaps) entre os elementos na tabela. Esta métrica é relevante primariamente para as técnicas de Endereçamento Aberto (Linear e Duplo), pois mede a distribuição de dados e o agrupamento.
 
 ## 3. Resultados e Análise
 
@@ -126,15 +127,15 @@ Para uma visualização clara, gráficos são essenciais. Abaixo estão os dados
 
 ![Texto Alternativo](imagesPJBL/explosao_desempenho.png)
 
-## tabela 1000003
+## Resultados da Tabela de Tamanho 1000003
 
 ![Texto Alternativo](imagesPJBL/tabela_1000003.png)
 
-## tabela 100003
+## Resultados da Tabela de Tamanho 100003
 
 ![Texto Alternativo](imagesPJBL/tabela_100003.png)
 
-## tabela 10007
+## Resultados da Tabela de Tamanho 10007
 
 ![Texto Alternativo](imagesPJBL/tabela_10007.png)
 
@@ -162,4 +163,4 @@ Em suma, a escolha da técnica ideal depende diretamente da aplicação. Para si
     ```bash
     java Main
     ```
-5.  Ao final da execução, os resultados serão gerados em três arquivos: `resultado10007.csv`, `resultado100003.csv` e `resultado1000003.csv`.
+5.  Ao final da execução, os resultados são gerados em arquivos .csv correspondentes aos tamanhos de tabela testados: `resultado10007.csv`, `resultado100003.csv` e `resultado1000003.csv`.
