@@ -1,47 +1,51 @@
-public class HashLinear {
+public class HashDuplo {
     Registro[] tabela;
     int tamanho;
     long colisoes;
 
-    public HashLinear(int tamanho) {
+    public HashDuplo(int tamanho) {
         this.tamanho = tamanho;
         this.tabela = new Registro[tamanho];
         this.colisoes = 0;
     }
 
-    public int funcaoHash(int key){
-        return key % tamanho;
+    int hash1(long chave) {
+        return (int)(chave % tamanho);
     }
 
-    public void inserir(int codigo){
+    int hash2(long chave) {
+        return 1 + (int)(chave % (tamanho - 1));
+    }
+
+    void inserir(int codigo) {
         Registro reg = new Registro(codigo);
-        int pos = funcaoHash(reg.getCodigo());
+        int pos = hash1(codigo);
+        int passo = hash2(codigo);
         int tentativas = 0;
 
-        // Verifica se a posição na tabela já está ocupada
-        while(tabela[pos] != null && tabela[pos].getCodigo() != reg.getCodigo()){
-            colisoes++; // Incrementa o contador de colisões
+        while (tabela[pos] != null) {
+            colisoes++;
+            pos = (pos + passo) % tamanho;
             tentativas++;
-            pos = (pos + 1) % tamanho;
-            // Prevenção de loop infinito se a tabela estiver cheia
             if (tentativas >= tamanho) {
 
                 return;
             }
         }
+
         tabela[pos] = reg;
     }
 
     boolean buscar(int codigo) {
-        int pos = funcaoHash(codigo);
+        int pos = hash1(codigo);
+        int passo = hash2(codigo);
         int tentativas = 0;
 
-        // Verifica se a posição na tabela já está ocupada
         while (tabela[pos] != null) {
             if (tabela[pos].getCodigo() == codigo) {
                 return true;
             }
-            pos = (pos + 1) % tamanho;
+            pos = (pos + passo) % tamanho;
             tentativas++;
             if (tentativas >= tamanho) break;
         }
@@ -81,7 +85,6 @@ public class HashLinear {
         } else {
             mediaGap = 0;
         }
-
         int valorMinGapFinal;
 
         if (minGap == 999999) {

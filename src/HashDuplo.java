@@ -18,6 +18,7 @@ public class HashDuplo {
     }
 
     void inserir(int codigo) {
+        // cria um novo registro
         Registro reg = new Registro(codigo);
         int pos = hash1(codigo);
         int passo = hash2(codigo);
@@ -45,7 +46,7 @@ public class HashDuplo {
             if (tabela[pos].getCodigo() == codigo) {
                 return true;
             }
-            pos = (pos + passo) % tamanho;
+            pos = (pos + passo) % tamanho; // Próxima posição de busca
             tentativas++;
             if (tentativas >= tamanho) break;
         }
@@ -85,6 +86,14 @@ public class HashDuplo {
         } else {
             mediaGap = 0;
         }
-        return new int[]{minGap == 999999 ? 0 : minGap, maxGap, mediaGap};
+        int valorMinGapFinal;
+
+        if (minGap == 999999) {
+            valorMinGapFinal = 0;
+        } else {
+            valorMinGapFinal = minGap;
+        }
+
+        return new int[]{valorMinGapFinal, maxGap, mediaGap};
     }
 }

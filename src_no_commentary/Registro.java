@@ -1,6 +1,6 @@
 public class Registro {
     private int codigo;
-    private Registro proximo; // Referência para o próximo Registro na lista (usado no encadeamento)
+    private Registro proximo;
 
     public Registro(int codigo) {
         this.codigo = codigo;

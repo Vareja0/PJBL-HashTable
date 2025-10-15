@@ -18,12 +18,12 @@ public class HashLinear {
         int pos = funcaoHash(reg.getCodigo());
         int tentativas = 0;
 
-        // Verifica se a posição na tabela já está ocupada
+
         while(tabela[pos] != null && tabela[pos].getCodigo() != reg.getCodigo()){
-            colisoes++; // Incrementa o contador de colisões
+            colisoes++;
             tentativas++;
             pos = (pos + 1) % tamanho;
-            // Prevenção de loop infinito se a tabela estiver cheia
+
             if (tentativas >= tamanho) {
 
                 return;
@@ -36,7 +36,7 @@ public class HashLinear {
         int pos = funcaoHash(codigo);
         int tentativas = 0;
 
-        // Verifica se a posição na tabela já está ocupada
+
         while (tabela[pos] != null) {
             if (tabela[pos].getCodigo() == codigo) {
                 return true;

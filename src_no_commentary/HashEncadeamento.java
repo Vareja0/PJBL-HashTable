@@ -17,11 +17,10 @@ public class HashEncadeamento {
         Registro reg = new Registro(codigo);
         int pos = funcaoHash(reg.getCodigo());
 
-        // Verifica se a posição na tabela já está ocupada
         if (tabela[pos] != null){
-            colisoes++; // Incrementa o contador de colisões
+            colisoes++;
             Registro atual = tabela[pos];
-            // Percorre a lista encadeada até encontrar o último elemento.
+
             while(atual.getProximo() != null){
                 colisoes++;
                 atual = atual.getProximo();
@@ -29,7 +28,7 @@ public class HashEncadeamento {
 
             atual.setProximo(reg);
         } else if (tabela[pos] == null){
-            // Se a posição estiver livre, insere o registro diretamente
+
             tabela[pos] = reg;
         }
     }
@@ -37,17 +36,17 @@ public class HashEncadeamento {
     public boolean buscar(int codigo){
         int pos = funcaoHash(codigo);
 
-        // Se a posição estiver vazia, o código não existe
+
         if (tabela[pos] == null){
             return false;
         }
         else{
             Registro atual = tabela[pos];
-            // Percorre a lista encadeada na posição calculada
+
             while(atual != null && atual.getCodigo() != codigo){
                 atual = atual.getProximo();
             }
-            // Se 'atual' não for nulo, significa que o código foi encontrado
+
             if (atual == null){
                 return false;
             }
@@ -62,12 +61,12 @@ public class HashEncadeamento {
         for (int i = 0; i < tamanho; i++) {
             int tam = 0;
             Registro atual = tabela[i];
-            // Calcula o tamanho da lista na posição 'i'
+
             while (atual != null) {
                 tam++;
                 atual = atual.getProximo();
             }
-            // Atualiza o ranking das 3 maiores listas
+
             if (tam > top3[0]) {
                 top3[2] = top3[1];
                 top3[1] = top3[0];
@@ -92,7 +91,7 @@ public class HashEncadeamento {
 
 
         for (int i = 0; i < tamanho; i++) {
-            // Se a posição está vazia, estamos em um "gap"
+
             if (tabela[i] == null) {
                 if (!emGap) {
                     emGap = true;
@@ -101,7 +100,7 @@ public class HashEncadeamento {
                     gapAtual++;
                 }
             } else {
-                // Se a posição está ocupada e vínhamos de um gap, calculamos as estatísticas
+
                 if (emGap) {
                     if (gapAtual < minGap) minGap = gapAtual;
                     if (gapAtual > maxGap) maxGap = gapAtual;
