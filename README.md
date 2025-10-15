@@ -11,6 +11,8 @@ Este trabalho acadêmico, desenvolvido para a disciplina de Estrutura de Dados, 
 O desempenho de cada abordagem foi medido em cenários variados de tamanho de tabela e volume de dados, analisando métricas como tempo de inserção, tempo de busca e número de colisões.
 
 * **Autor:** Riscala Miguel Fadel Neto
+* **Autor:** Victor Valerio Fadel
+* **Autor:** Pedro senes velloso
 
 ## 2. Implementação e Metodologia
 
