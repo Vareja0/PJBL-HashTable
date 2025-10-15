@@ -118,6 +118,26 @@ Para uma visualização clara, gráficos são essenciais. Abaixo estão os dados
 
 *(Um gráfico de barras com esses dados mostraria visualmente a explosão no tempo para as técnicas de endereçamento aberto em alta carga.)*
 
+## Comparação Entre Tabelas
+
+![Texto Alternativo](imagesPJBL/comparacao_tabelas.png)
+
+## Explosão de Desempenho
+
+![Texto Alternativo](imagesPJBL/explosao_desempenho.png)
+
+## tabela 1000003
+
+![Texto Alternativo](imagesPJBL/tabela_1000003.png)
+
+## tabela 100003
+
+![Texto Alternativo](imagesPJBL/tabela_100003.png)
+
+## tabela 10007
+
+![Texto Alternativo](imagesPJBL/tabela_10007.png)
+
 ## 4. Conclusão
 
 Com base na análise dos dados, as seguintes conclusões podem ser tiradas:
